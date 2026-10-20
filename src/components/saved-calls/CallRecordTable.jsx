@@ -1,4 +1,4 @@
-import { Edit, Trash2 } from 'lucide-react'
+import { Edit, Trash2, Eye } from 'lucide-react'
 import { countDone, totalStatusItems } from '../../utils/checklistUtils'
 
 const CLASSIFICATION_COLORS = {
@@ -7,7 +7,7 @@ const CLASSIFICATION_COLORS = {
   Detractor: 'bg-red-100 text-red-700',
 }
 
-export default function CallRecordTable({ records, onEdit, onDelete }) {
+export default function CallRecordTable({ records, onEdit, onDelete, onView }) {
   if (records.length === 0) {
     return (
       <div className="px-4 py-8 text-center text-sm text-slate-400">
@@ -47,6 +47,13 @@ export default function CallRecordTable({ records, onEdit, onDelete }) {
               <div className="flex items-center gap-1.5 shrink-0">
                 <span className="text-[10px] text-slate-400 tabular-nums">{done}/{total}</span>
                 <span className="text-[10px] text-slate-400">{r.additionalCheckbox}</span>
+                <button
+                  onClick={() => onView(r)}
+                  className="p-1 rounded hover:bg-slate-200 text-slate-400 hover:text-slate-600"
+                  title="View"
+                >
+                  <Eye size={14} />
+                </button>
                 <button
                   onClick={() => onEdit(r)}
                   className="p-1 rounded hover:bg-blue-100 text-slate-400 hover:text-blue-600"
