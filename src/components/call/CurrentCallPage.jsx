@@ -3,6 +3,7 @@ import CallClassification from './CallClassification'
 import CallChecklist from './CallChecklist'
 import NotesPanel from './NotesPanel'
 import SaveCallButton from './SaveCallButton'
+import { DURATION_OPTIONS, formatDurationOption } from '../../utils/durationUtils'
 
 export default function CurrentCallPage({ draft, updateField, updateChecklistItem, toggleYesNoItem, toggleCallType, resetDraft, addRecord, editingId, editRecord, onCancelEdit }) {
   const handleSave = () => {
@@ -65,8 +66,27 @@ export default function CurrentCallPage({ draft, updateField, updateChecklistIte
         onNotesChange={(v) => updateField('notes', v)}
       />
 
-      {/* Save button */}
-      <SaveCallButton onSave={handleSave} />
+      {/* Save button + Duration on right */}
+      <div className="flex items-end gap-2 px-2 py-2">
+        <SaveCallButton onSave={handleSave} />
+        <div className="w-28">
+          <label className="block text-xs font-medium text-slate-600 mb-0.5">Duration</label>
+          <input
+            type="text"
+            list="call-duration-options"
+            value={draft.durationMinutes}
+            onChange={(e) => updateField('durationMinutes', e.target.value)}
+            className="w-full px-2 py-1 text-xs border border-slate-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-400 focus:border-blue-400"
+            placeholder="min"
+            aria-label="Call duration"
+          />
+          <datalist id="call-duration-options">
+            {DURATION_OPTIONS.map((m) => (
+              <option key={m} value={formatDurationOption(m)} />
+            ))}
+          </datalist>
+        </div>
+      </div>
     </div>
   )
 }

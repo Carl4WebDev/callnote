@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { CHECKLIST_ITEMS, CLASSIFICATIONS, YES_NO_ITEMS } from '../constants/callFlow'
 import { buildEmptyChecklist } from '../utils/checklistUtils'
 import { getCallDraft, saveCallDraft, clearCallDraft } from '../infrastructure/storage/localStorageService'
+import { formatDurationOption } from '../utils/durationUtils'
 
 const INITIAL_STATE = {
   memberName: '',
@@ -9,6 +10,7 @@ const INITIAL_STATE = {
   callTypes: [],
   checklist: buildEmptyChecklist(CHECKLIST_ITEMS),
   additionalCheckbox: false,
+  durationMinutes: '',
   notes: '',
 }
 
@@ -71,6 +73,7 @@ export function useCallDraft() {
       callTypes: Array.isArray(record.callTypes) ? record.callTypes : (record.callType ? [record.callType] : []),
       checklist,
       additionalCheckbox: record.additionalCheckbox === 'Yes',
+      durationMinutes: record.durationMinutes != null ? formatDurationOption(record.durationMinutes) : '',
       notes: record.notes || '',
     })
   }, [])

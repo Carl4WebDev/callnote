@@ -17,7 +17,7 @@ export default function SaveCallButton({ onSave }) {
   }
 
   return (
-    <div className="px-2 py-2 flex items-center gap-2">
+    <div className="flex items-center gap-2 pb-0.5">
       <button
         onClick={handleClick}
         disabled={saving}

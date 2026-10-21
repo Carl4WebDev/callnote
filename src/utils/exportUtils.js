@@ -1,4 +1,5 @@
 import { CHECKLIST_ITEMS } from '../constants/callFlow'
+import { formatDuration } from './durationUtils'
 
 function formatDate(date) {
   return new Date(date).toLocaleString()
@@ -19,6 +20,7 @@ export function exportTxt(records) {
     lines.push(`Classification: ${r.classification}`)
     const callTypes = Array.isArray(r.callTypes) ? r.callTypes : (r.callType ? [r.callType] : [])
     lines.push(`Call Types: ${callTypes.length > 0 ? callTypes.join(', ') : '(none)'}`)
+    lines.push(`Duration: ${formatDuration(r.durationMinutes)}`)
     lines.push('')
     lines.push('Checklist:')
     for (const item of CHECKLIST_ITEMS) {
@@ -46,6 +48,7 @@ export function exportExcel(records) {
         'Member Name': r.memberName || '',
         'Classification': r.classification,
         'Call Types': callTypes.join(', '),
+        'Duration (min)': r.durationMinutes ?? '',
         'Unlabeled Checkbox': r.additionalCheckbox,
         'Notes': r.notes || '',
       }

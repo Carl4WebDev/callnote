@@ -1,5 +1,6 @@
 import { Edit, Trash2, Eye } from 'lucide-react'
 import { countDone, totalStatusItems } from '../../utils/checklistUtils'
+import { formatDuration } from '../../utils/durationUtils'
 
 const CLASSIFICATION_COLORS = {
   Promoter: 'bg-green-100 text-green-700',
@@ -42,6 +43,9 @@ export default function CallRecordTable({ records, onEdit, onDelete, onView }) {
                 </div>
                 <div className="text-[10px] text-slate-400 mt-0.5">
                   {new Date(r.createdAt).toLocaleString()}
+                  {r.durationMinutes != null && (
+                    <span className="ml-1.5 text-slate-500">{formatDuration(r.durationMinutes)}</span>
+                  )}
                 </div>
               </div>
               <div className="flex items-center gap-1.5 shrink-0">

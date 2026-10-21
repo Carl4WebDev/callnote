@@ -5,6 +5,7 @@ import {
   updateCallRecord,
   deleteCallRecord,
 } from '../infrastructure/storage/localStorageService'
+import { parseDurationMinutes } from '../utils/durationUtils'
 
 export function useCallRecords() {
   const [records, setRecords] = useState(() => getCallRecords())
@@ -24,6 +25,7 @@ export function useCallRecords() {
       callTypes: [...(draft.callTypes || [])],
       checklist: { ...draft.checklist },
       additionalCheckbox: draft.additionalCheckbox ? 'Yes' : 'No',
+      durationMinutes: parseDurationMinutes(draft.durationMinutes),
       notes: draft.notes,
     }
     const success = saveCallRecord(record)
@@ -40,6 +42,7 @@ export function useCallRecords() {
       callTypes: [...(draft.callTypes || [])],
       checklist: { ...draft.checklist },
       additionalCheckbox: draft.additionalCheckbox ? 'Yes' : 'No',
+      durationMinutes: parseDurationMinutes(draft.durationMinutes),
       notes: draft.notes,
     }
     const success = updateCallRecord(id, updates)
