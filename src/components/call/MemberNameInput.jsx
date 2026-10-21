@@ -1,7 +1,7 @@
 export default function MemberNameInput({ value, onChange }) {
   return (
     <div>
-      <label className="block text-xs font-medium text-slate-600 mb-0.5">Member Name</label>
+      <label className="block text-xs font-medium text-slate-600 mb-0.5">Member First Name</label>
       <input
         type="text"
         value={value}

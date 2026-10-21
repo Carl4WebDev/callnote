@@ -3,9 +3,10 @@ import CallClassification from './CallClassification'
 import CallChecklist from './CallChecklist'
 import NotesPanel from './NotesPanel'
 import SaveCallButton from './SaveCallButton'
+import StatsPopup from '../common/StatsPopup'
 import { DURATION_OPTIONS, formatDurationOption } from '../../utils/durationUtils'
 
-export default function CurrentCallPage({ draft, updateField, updateChecklistItem, toggleYesNoItem, toggleCallType, resetDraft, addRecord, editingId, editRecord, onCancelEdit }) {
+export default function CurrentCallPage({ draft, updateField, updateChecklistItem, toggleYesNoItem, toggleCallType, resetDraft, addRecord, editingId, editRecord, onCancelEdit, records }) {
   const handleSave = () => {
     let success
     if (editingId) {
@@ -22,6 +23,7 @@ export default function CurrentCallPage({ draft, updateField, updateChecklistIte
 
   return (
     <div className="flex flex-col flex-1 overflow-y-auto">
+      <StatsPopup records={records} />
       {editingId && (
         <div className="px-2 py-1 bg-amber-50 border-b border-amber-200 flex items-center justify-between shrink-0">
           <span className="text-xs text-amber-700 font-medium">Editing record</span>

@@ -66,6 +66,7 @@ export default function App() {
           editingId={editingId}
           editRecord={editRecord}
           onCancelEdit={handleCancelEdit}
+          records={records}
         />
       )}
 

@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { Download, FileText, FileSpreadsheet } from 'lucide-react'
 import CallRecordTable from './CallRecordTable'
 import ConfirmDialog from '../common/ConfirmDialog'
+import CallStatsBar from '../common/CallStatsBar'
 import { exportTxt, exportExcel } from '../../utils/exportUtils'
-import { averageDuration, formatDuration } from '../../utils/durationUtils'
+import { formatDuration } from '../../utils/durationUtils'
 
 export default function SavedCallsPage({ records, onEdit, onDelete }) {
   const [deleteTarget, setDeleteTarget] = useState(null)
@@ -17,40 +18,11 @@ export default function SavedCallsPage({ records, onEdit, onDelete }) {
     }
   }
 
-  const releaseDoneCount = records.filter(
-    (r) => r.checklist?.Release === 'Done'
-  ).length
-  const releasePct = records.length > 0
-    ? Math.round((releaseDoneCount / records.length) * 100)
-    : 0
-  const unlabeledYesCount = records.filter(
-    (r) => r.additionalCheckbox === 'Yes'
-  ).length
-  const unlabeledNoCount = records.filter(
-    (r) => r.additionalCheckbox === 'No'
-  ).length
-  const avgDuration = averageDuration(records)
-
   return (
     <div className="flex flex-col overflow-auto">
       {/* Stats bar */}
-      <div className="px-2 py-1.5 border-b border-slate-200 flex items-center gap-3 text-[10px] text-slate-500 flex-wrap">
-        <span>
-          Release Done: <strong className="text-slate-700">{releaseDoneCount}</strong>/{records.length}
-          {' '}(<strong className="text-slate-700">{releasePct}</strong>%)
-        </span>
-        <span className="text-slate-300">|</span>
-        <span>
-          Avg Duration: <strong className="text-slate-700">{formatDuration(avgDuration)}</strong>
-        </span>
-        <span className="text-slate-300">|</span>
-        <span>
-          Unlabeled Yes: <strong className="text-green-600">{unlabeledYesCount}</strong>
-        </span>
-        <span className="text-slate-300">|</span>
-        <span>
-          Unlabeled No: <strong className="text-red-500">{unlabeledNoCount}</strong>
-        </span>
+      <div className="px-2 py-1.5 border-b border-slate-200">
+        <CallStatsBar records={records} />
       </div>
 
       {/* Export bar */}
