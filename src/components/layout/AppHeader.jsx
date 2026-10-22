@@ -14,7 +14,7 @@ export default function AppHeader({ menuOpen, onToggleMenu, onNavigate, currentP
         currentPage={currentPage}
         onClearData={onClearData}
       />
-      <h1 className="text-xs font-semibold text-slate-800 truncate">carl4optum</h1>
+      <h1 className="text-xs font-semibold text-slate-800 truncate">callnote</h1>
       {currentPage === 'current' && (
         <span className="ml-auto text-[10px] text-slate-500 tabular-nums whitespace-nowrap">
           {done}/{total}

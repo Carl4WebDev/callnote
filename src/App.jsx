@@ -3,6 +3,7 @@ import AppHeader from './components/layout/AppHeader'
 import CurrentCallPage from './components/call/CurrentCallPage'
 import SavedCallsPage from './components/saved-calls/SavedCallsPage'
 import ConfirmDialog from './components/common/ConfirmDialog'
+import PrivacyReminder from './components/common/PrivacyReminder'
 import { useCallDraft } from './hooks/useCallDraft'
 import { useCallRecords } from './hooks/useCallRecords'
 import { clearAllData } from './infrastructure/storage/localStorageService'
@@ -13,7 +14,7 @@ export default function App() {
   const [editingId, setEditingId] = useState(null)
   const [showClearConfirm, setShowClearConfirm] = useState(false)
 
-  const { draft, updateField, updateChecklistItem, toggleYesNoItem, toggleCallType, resetDraft, loadRecord } = useCallDraft()
+  const { draft, updateField, updateChecklistItem, setChecklistItem, toggleYesNoItem, toggleCallType, resetDraft, loadRecord } = useCallDraft()
   const { records, addRecord, editRecord, removeRecord, refreshRecords } = useCallRecords()
 
   const handleNavigate = useCallback((page) => {
@@ -54,11 +55,14 @@ export default function App() {
         onClearData={handleClearData}
       />
 
+      <PrivacyReminder />
+
       {currentPage === 'current' && (
         <CurrentCallPage
           draft={draft}
           updateField={updateField}
           updateChecklistItem={updateChecklistItem}
+          setChecklistItem={setChecklistItem}
           toggleYesNoItem={toggleYesNoItem}
           toggleCallType={toggleCallType}
           resetDraft={resetDraft}

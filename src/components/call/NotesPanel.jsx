@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import { Copy, Clock, ChevronDown, ChevronRight, X } from 'lucide-react'
 import { CALL_TYPES } from '../../constants/callFlow'
 
-const QUICK_INSERTS = ['Concern:', 'Action Taken:', 'Resolution:', 'Follow-up:', 'Reference:']
+const QUICK_INSERTS = ['Concern:', 'Action Taken:', 'Resolution:', 'Follow-up:', 'Reference:', 'Disconnected Call', 'System Outage', 'Member Hung-up']
 
 export default function NotesPanel({ callTypes, onToggleCallType, notesValue, onNotesChange }) {
   const [expanded, setExpanded] = useState(true)

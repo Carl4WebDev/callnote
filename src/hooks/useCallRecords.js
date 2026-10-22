@@ -25,6 +25,7 @@ export function useCallRecords() {
       callTypes: [...(draft.callTypes || [])],
       checklist: { ...draft.checklist },
       additionalCheckbox: draft.additionalCheckbox ? 'Yes' : 'No',
+      grievance: draft.grievance === 'Yes' ? 'Yes' : 'No',
       durationMinutes: parseDurationMinutes(draft.durationMinutes),
       notes: draft.notes,
     }
@@ -42,6 +43,7 @@ export function useCallRecords() {
       callTypes: [...(draft.callTypes || [])],
       checklist: { ...draft.checklist },
       additionalCheckbox: draft.additionalCheckbox ? 'Yes' : 'No',
+      grievance: draft.grievance === 'Yes' ? 'Yes' : 'No',
       durationMinutes: parseDurationMinutes(draft.durationMinutes),
       notes: draft.notes,
     }

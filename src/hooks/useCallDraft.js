@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   callTypes: [],
   checklist: buildEmptyChecklist(CHECKLIST_ITEMS),
   additionalCheckbox: false,
+  grievance: 'No',
   durationMinutes: '',
   notes: '',
 }
@@ -35,6 +36,16 @@ export function useCallDraft() {
       checklist: {
         ...prev.checklist,
         [item]: prev.checklist[item] === status ? '' : status,
+      },
+    }))
+  }, [])
+
+  const setChecklistItem = useCallback((item, value) => {
+    setDraft((prev) => ({
+      ...prev,
+      checklist: {
+        ...prev.checklist,
+        [item]: value,
       },
     }))
   }, [])
@@ -73,6 +84,7 @@ export function useCallDraft() {
       callTypes: Array.isArray(record.callTypes) ? record.callTypes : (record.callType ? [record.callType] : []),
       checklist,
       additionalCheckbox: record.additionalCheckbox === 'Yes',
+      grievance: record.grievance === 'Yes' ? 'Yes' : 'No',
       durationMinutes: record.durationMinutes != null ? formatDurationOption(record.durationMinutes) : '',
       notes: record.notes || '',
     })
@@ -82,6 +94,7 @@ export function useCallDraft() {
     draft,
     updateField,
     updateChecklistItem,
+    setChecklistItem,
     toggleYesNoItem,
     toggleCallType,
     resetDraft,

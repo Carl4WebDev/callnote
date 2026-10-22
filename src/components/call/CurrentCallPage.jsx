@@ -6,7 +6,7 @@ import SaveCallButton from './SaveCallButton'
 import StatsPopup from '../common/StatsPopup'
 import { DURATION_OPTIONS, formatDurationOption } from '../../utils/durationUtils'
 
-export default function CurrentCallPage({ draft, updateField, updateChecklistItem, toggleYesNoItem, toggleCallType, resetDraft, addRecord, editingId, editRecord, onCancelEdit, records }) {
+export default function CurrentCallPage({ draft, updateField, updateChecklistItem, setChecklistItem, toggleYesNoItem, toggleCallType, resetDraft, addRecord, editingId, editRecord, onCancelEdit, records }) {
   const handleSave = () => {
     let success
     if (editingId) {
@@ -52,8 +52,22 @@ export default function CurrentCallPage({ draft, updateField, updateChecklistIte
         </div>
       </div>
 
+      {/* Grievance row */}
+      <div className="flex gap-2 px-2 pb-1 items-center">
+        <label className="flex items-center gap-1.5 text-xs font-medium text-slate-600 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={draft.grievance === 'Yes'}
+            onChange={(e) => updateField('grievance', e.target.checked ? 'Yes' : 'No')}
+            className="h-3.5 w-3.5 accent-red-600 cursor-pointer"
+            aria-label="Grievance: Yes/No"
+          />
+          Grievance
+        </label>
+      </div>
+
       {/* Checklist */}
-      <CallChecklist checklist={draft.checklist} onToggle={updateChecklistItem} onToggleYesNo={toggleYesNoItem} />
+      <CallChecklist checklist={draft.checklist} onToggle={updateChecklistItem} onSetValue={setChecklistItem} onToggleYesNo={toggleYesNoItem} />
 
       {/* Classification below checklist */}
       <div className="px-2 py-1">
